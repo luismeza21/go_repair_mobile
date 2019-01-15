@@ -1,18 +1,53 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="goRepair">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>GoRepair</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content>
+  <ion-slides spaceBetween="10" pager>
+    <ion-slide>
+      <img src="../assets/home/slide/slide1.png" />
+      <p>Bienvenido a GoRepair</p>
+    </ion-slide>
+    <ion-slide>
+      <img src="../assets/home/slide/slide2.png" />
+      <p>Encuentra la solucion GoRepair </p>
+    </ion-slide>
+  </ion-slides>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <ion-list>
+    <div *ngIf="ubicacion != true">
+      <button ion-item *ngFor="let se of search" (click)="openDetailSearch(se)" icon-start>
+      <ion-icon name="{{se.icon}}" [ngStyle]="{'color': se.color}" item-start></ion-icon>
+      {{ se.titulo }}
+    </button>
+    </div>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+    <ion-item>
+      <ion-label>Tipo vehiculo</ion-label>
+      <ion-select [(ngModel)]="tipoVehiculo" multiple="true">
+        <ion-option>Carro</ion-option>
+        <ion-option>Motocicleta</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Causa</ion-label>
+      <ion-select [(ngModel)]="causal" multiple="true">
+        <ion-option>Pichada</ion-option>
+        <ion-option>Falla</ion-option>
+        <ion-option>Otro</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Mi Ubicacion</ion-label>
+      <ion-toggle [(ngModel)]="ubicacion" disabled="false"></ion-toggle>
+    </ion-item>
+    <div padding>
+      <button ion-button color="goRepair" block (click)="buscarTenicos()">Buscar Tecnicos</button>
+    </div>
+  </ion-list>
 </ion-content>

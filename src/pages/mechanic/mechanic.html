@@ -1,0 +1,18 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Mechanic</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+ <ion-list inset>
+    <ion-item *ngFor="let me of mechanic">
+      <h2>{{me.name}}</h2>
+      <p>{{me.phonenumber}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

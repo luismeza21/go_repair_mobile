@@ -1,44 +1,67 @@
+import { SocialPage } from './../pages/social/social';
+import { MisfavoritosPage } from './../pages/misfavoritos/misfavoritos';
+import { LoginPage } from './../pages/login/login';
+import { PageInterface } from './model/pageinterface';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+   @ViewChild(Nav) nav: Nav;
 
+
+  menuPages: PageInterface[] = [
+    { titulo: 'Solicitar Ayuda', nombre: 'HomePage', component: HomePage, icon: 'pin' },
+    { titulo: 'Servicios', nombre: 'ServiciosPage', component: HomePage, icon: 'ios-list-box' }
+
+  ];
+
+  menuCuenta: PageInterface[] = [
+
+    { titulo: 'Login', nombre: 'LoginPage', component: LoginPage, icon: 'key' },
+    { titulo: 'Mis Favoritos', nombre: 'MisfavoritosPage', component: MisfavoritosPage, icon: 'heart' },
+    { titulo: 'Compartir', nombre: 'SocialPage', component: SocialPage, icon: 'share' }
+  ]
+
+  
   rootPage: any = HomePage;
+  
 
-  pages: Array<{title: string, component: any}>;
-
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform,
+   public statusBar: StatusBar,
+    public splashScreen: SplashScreen) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
-    ];
 
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
+  openPage(page: PageInterface) {
     this.nav.setRoot(page.component);
+  }
+
+  
+  isActive(page: PageInterface) {
+    let childNav = this.nav.getActiveChildNavs();
+    if (this.nav.getActive() &&  this.nav.getActive().name === page.nombre) {
+      return 'goRepair';
+    }
+    return;
+  }
+
+  signOut(){
+    console.log("Hola");
   }
 }

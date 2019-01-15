@@ -1,0 +1,25 @@
+<ion-header>
+
+ <ion-navbar color="goRepair">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mis Favoritos</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+ <ion-list [virtualScroll]="mechanics" approxItemHeight="30px">
+    <ion-item *virtualItem="let mecha">
+      <ion-thumbnail item-start>
+        <img src="../assets/mechanic/terminator.png">
+      </ion-thumbnail>
+      <h2>{{mecha.name}}</h2>
+      <p>{{mecha.phonenumber}}</p>
+      <button ion-button clear item-end>Contactar</button>
+    </ion-item>
+  </ion-list>
+</ion-content>
